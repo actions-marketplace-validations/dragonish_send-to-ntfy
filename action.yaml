@@ -1,0 +1,128 @@
+name: 'send-to-ntfy'
+author: 'dragonish'
+description: 'Send a message to ntfy.'
+inputs:
+  topic:
+    description: 'Target topic name.'
+    required: true
+  message:
+    description: 'Message body; set to "triggered" if empty.'
+    required: false
+    default: ''
+  title:
+    description: 'Message title.'
+    required: false
+    default: ''
+  tags:
+    description: 'List of tags that may or not map to emojis.'
+    required: false
+    default: ''
+  priority:
+    description: 'Message priority with 1=min, 3=default and 5=max.'
+    required: false
+    default: '3'
+  markdown:
+    description: 'Set to true if the message is Markdown-formatted.'
+    required: false
+    default: 'false'
+  click:
+    description: 'Website opened when notification is clicked.'
+    required: false
+    default: ''
+  actions:
+    description: 'Custom user action buttons for notifications.'
+    required: false
+    default: ''
+  attach:
+    description: 'A local file or an external URL as an attachment.'
+    required: false
+    default: ''
+  filename:
+    description: 'File name of the attachment.'
+    required: false
+    default: ''
+  icon:
+    description: 'URL to use as notification icon.'
+    required: false
+    default: ''
+  delay:
+    description: 'Timestamp or duration for delayed delivery.'
+    required: false
+    default: ''
+  email:
+    description: 'E-mail address for e-mail notifications.'
+    required: false
+    default: ''
+  call:
+    description: 'Phone number to use for voice call.'
+    required: false
+    default: ''
+  sequence-id:
+    description: 'Sequence ID for updating/deleting notifications.'
+    required: false
+    default: ''
+  no-cache:
+    description: 'Make sure the message is not cached on the server.'
+    required: false
+    default: 'false'
+  no-firebase:
+    description: 'Instruct the server not to forward messages to Firebase.'
+    required: false
+    default: 'false'
+  unified-push:
+    description: 'Apps using ntfy as a UnifiedPush distributor.'
+    required: false
+    default: 'false'
+  poll-id:
+    description: 'Used for iOS push notifications.'
+    required: false
+    default: ''
+  template:
+    description: 'Enable templating.'
+    required: false
+    default: ''
+  base-url:
+    description: 'ntfy service address.'
+    required: false
+    default: 'https://ntfy.sh'
+  access-token:
+    description: 'Authenticate against the ntfy server.'
+    required: false
+    default: ''
+  basic-auth:
+    description: 'Use standard base64 to encode the colon-separated <username>:<password>.'
+    required: false
+    default: ''
+outputs:
+  success:
+    description: 'Informs whether sending was successful.'
+  id:
+    description: 'Randomly chosen message identifier.'
+  time:
+    description: 'Message date time, as Unix time stamp.'
+  expires:
+    description: 'Unix time stamp indicating when the message will be deleted.'
+  topic:
+    description: 'The topic associated with the message.'
+  sequence_id:
+    description: 'Sequence ID for updating/deleting notifications'
+  message:
+    description: 'Message body.'
+  title:
+    description: 'Message title.'
+  tags:
+    description: 'List of tags that may or not map to emojis.'
+  priority:
+    description: 'Message priority with 1=min, 3=default and 5=max.'
+  click:
+    description: 'Website opened when notification is clicked.'
+  actions:
+    description: 'Action buttons that can be displayed in the notification.'
+  attachment:
+    description: 'Details about an attachment (name, URL, size, ...).'
+runs:
+  using: 'node24'
+  main: 'main.cjs'
+branding:
+  icon: 'message-square'
+  color: 'green'
