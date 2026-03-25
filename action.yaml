@@ -105,7 +105,7 @@ outputs:
   topic:
     description: 'The topic associated with the message.'
   sequence_id:
-    description: 'Sequence ID for updating/deleting notifications'
+    description: 'Sequence ID for updating/deleting notifications.'
   message:
     description: 'Message body.'
   title:
