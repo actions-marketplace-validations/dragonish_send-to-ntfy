@@ -86,11 +86,19 @@ inputs:
     required: false
     default: 'https://ntfy.sh'
   access-token:
-    description: 'Authenticate against the ntfy server.'
+    description: 'Authenticate against the ntfy server using access token.'
     required: false
     default: ''
   basic-auth:
-    description: 'Use standard base64 to encode the colon-separated <username>:<password>.'
+    description: 'Authenticate using base64-encoded <username>:<password>.'
+    required: false
+    default: ''
+  username:
+    description: 'Username for authentication.'
+    required: false
+    default: ''
+  password:
+    description: 'Password for authentication.'
     required: false
     default: ''
 outputs:

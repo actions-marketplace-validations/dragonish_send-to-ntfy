@@ -39,6 +39,8 @@ async function main() {
     baseUrl: core.getInput('base-url'),
     accessToken: core.getInput('access-token'),
     basicAuth: core.getInput('basic-auth'),
+    username: core.getInput('username'),
+    password: core.getInput('password'),
   };
 
   if (!inputs.topic) {
@@ -80,6 +82,8 @@ async function main() {
       template: inputs.template,
       accessToken: inputs.accessToken,
       basicAuth: inputs.basicAuth,
+      username: inputs.username,
+      password: inputs.password,
     });
 
     core.info('Message sent successfully.');

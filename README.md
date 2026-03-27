@@ -78,7 +78,13 @@ jobs:
 | `poll-id` | string | `""` | `"the_poll_id"` | Used for iOS push notifications. | *iOS* |
 | `template` | string | `""` | `"grafana"` | Enable [message templating](https://docs.ntfy.sh/publish/#message-templating). | *Android, iOS, Web* |
 | `base-url` | string | `"https://ntfy.sh"` | `"https://example.com"` | ntfy service address. | |
-| `access-token` / `basic-auth` | string | `""` | `"tk_xxxxxxxxxx"` | Authenticate against the ntfy server. *`basic-auth`: use standard base64 to encode the colon-separated `<username>:<password>`.* | |
+| `access-token` | string | `""` | `"tk_xxxxxxxxxx"` | Authenticate against the ntfy server using access token. | |
+| `basic-auth` | string | `""` | `"xxxxxxxxxxxxxxx"` | Authenticate using base64-encoded `<username>:<password>`. | |
+| `username` | string | `""` | `"myuser"` | Username for authentication. | |
+| `password` | string | `""` | `"mypassword"` | Password for authentication. | |
+
+> [!NOTE]
+> If authentication is required, choose one of: `access-token`, `basic-auth`, or `username` + `password`.
 
 ### Action buttons
 

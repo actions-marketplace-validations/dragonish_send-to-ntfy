@@ -40686,7 +40686,7 @@ function copyActionToHeader(action) {
     return arr.join(', ');
 }
 async function send(inputs) {
-    const { apiUrl, message, title, tags, priority, markdown, click, actions, attach, filename, icon, delay, email, call, sequenceId, noCache, noFirebase, unifiedPush, pollId, template, accessToken, basicAuth, } = inputs;
+    const { apiUrl, message, title, tags, priority, markdown, click, actions, attach, filename, icon, delay, email, call, sequenceId, noCache, noFirebase, unifiedPush, pollId, template, accessToken, basicAuth, username = '', password, } = inputs;
     const headers = {};
     if (priority) {
         headers['X-Priority'] = priority.toString();
@@ -40758,6 +40758,9 @@ async function send(inputs) {
     }
     else if (basicAuth) {
         headers['Authorization'] = `Basic ${basicAuth}`;
+    }
+    else if (password) {
+        headers['Authorization'] = `Basic ${Buffer.from(username + ':' + password, 'utf-8').toString('base64')}`;
     }
     try {
         if (attach && isLocalPath(attach)) {
@@ -40850,6 +40853,8 @@ async function main() {
         baseUrl: getInput('base-url'),
         accessToken: getInput('access-token'),
         basicAuth: getInput('basic-auth'),
+        username: getInput('username'),
+        password: getInput('password'),
     };
     if (!inputs.topic) {
         panic('Target topic name is empty!');
@@ -40887,6 +40892,8 @@ async function main() {
             template: inputs.template,
             accessToken: inputs.accessToken,
             basicAuth: inputs.basicAuth,
+            username: inputs.username,
+            password: inputs.password,
         });
         info('Message sent successfully.');
         const { id, time, expires = 0, event, topic, sequence_id = '', message = '', title = '', tags: resTags = [], priority: resPriority = 0, click = '', actions: resActions = [], attachment, } = res;

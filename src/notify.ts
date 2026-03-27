@@ -93,6 +93,8 @@ export async function send(inputs: SendInputs) {
     template,
     accessToken,
     basicAuth,
+    username = '',
+    password,
   } = inputs;
 
   const headers: MessageHeaders = {};
@@ -179,6 +181,8 @@ export async function send(inputs: SendInputs) {
     headers['Authorization'] = `Bearer ${accessToken}`;
   } else if (basicAuth) {
     headers['Authorization'] = `Basic ${basicAuth}`;
+  } else if (password) {
+    headers['Authorization'] = `Basic ${Buffer.from(username + ':' + password, 'utf-8').toString('base64')}`;
   }
 
   try {

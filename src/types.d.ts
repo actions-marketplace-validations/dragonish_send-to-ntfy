@@ -21,7 +21,9 @@ type InputType =
   | 'template'
   | 'baseUrl'
   | 'accessToken'
-  | 'basicAuth';
+  | 'basicAuth'
+  | 'username'
+  | 'password';
 
 type Inputs = Record<InputType, string>;
 
