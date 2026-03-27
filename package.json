@@ -1,6 +1,6 @@
 {
   "name": "send-to-ntfy",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Send a message to ntfy",
   "main": "main.cjs",
   "type": "module",
