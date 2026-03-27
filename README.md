@@ -59,14 +59,14 @@ jobs:
 | -- | ---- | ------- | ------- | ----------- | --------- |
 | `topic` | string | **required** | `"mytopic"` | Target topic name. | |
 | `message` | string | `""` | `"Some message"` | Message body; send to `"triggered"` if empty. | *Android, iOS, Web* |
-| `title` | string | `""` | `Some title` | Message title. | *Android, iOS, Web* |
+| `title` | string | `""` | `"Some title"` | Message title. | *Android, iOS, Web* |
 | `tags` | string | `""` | `"tag1,tag2,tag3"` | List of tags that may or not map to emojis. Specify multiple tags by separating them with a comma. Use [the emoji short code list](https://docs.ntfy.sh/emojis/) to figure out what tags can be converted to emojis. | *Android, iOS, Web* |
 | `priority` | `1`, `2`, `3`, `4`, or `5` | `3` | `4` | Message priority with `1`=min, `2`=low, `3`=default, `4`=high and `5`=max. | *Android, iOS, Web* |
 | `markdown` | boolean | `false` | `true` | Set to `true` if the message is Markdown-formatted. | *Android, Web* |
 | `click` | string | `""` | `"https://example.com"` | You can define which URL to open when a notification is clicked. | *Android, iOS, Web* |
 | `actions` | string | `""` | `'[{"action": "view", "label": "Open", "url": "https://example.com"}, {"action": "copy", "label": "Copy", "value": "123456"}]'` | Custom user action buttons for notifications. Using a JSON array, the fields of the array elements can refer to: [Action buttons](#action-buttons). | *Android, iOS, Web* |
-| `attach` | string | `""` | `"release/build.zip"` or `https://example.com/file` | A local file or an external URL as an attachment. *For self-hosted services, you need to allow users to upload and attach files to notifications.* | *Android, Web* |
-| `filename` | string | `""` | `flower.jpg` | File name of the attachment. *To send a smaller (usually less than 4,096 bytes) text-only file as attachment, you must pass a `filename`.* | *Android, Web* |
+| `attach` | string | `""` | `"release/build.zip"` or `"https://example.com/file"` | A local file or an external URL as an attachment. *For self-hosted services, you need to allow users to upload and attach files to notifications.* | *Android, Web* |
+| `filename` | string | `""` | `"flower.jpg"` | File name of the attachment. *To send a smaller (usually less than 4,096 bytes) text-only file as attachment, you must pass a `filename`.* | *Android, Web* |
 | `icon` | string | `""` | `"https://example.com/icon.png"` | URL to use as notification icon. **Only JPEG and PNG images are supported at this time.** | *Android* |
 | `delay` | integer or string | `""` | `1639194738`, `"30m"` or `"tomorrow, 3pm"` | A Unix timestamp, a duration or a [natural language time string](https://github.com/olebedev/when) for delayed delivery. *The minimum delay you can set is 10 seconds and the maximum delay is 3 days.* | *Android, iOS, Web* |
 | `email` | string | `""` | `"ntfy@example.com"` | Forward messages to e-mail. *For self-hosted services, you need configure an SMTP server for outgoing messages.* | *Android, iOS, Web* |
