@@ -5,6 +5,14 @@ export function getSafeValue(input: string): string {
   return input;
 }
 
+export function encodeRfc2047(input: string): string {
+  if (/^[\x20-\x7E]*$/.test(input)) {
+    return input;
+  }
+  const encoded = Buffer.from(input, 'utf-8').toString('base64');
+  return `=?UTF-8?B?${encoded}?=`;
+}
+
 export function parseString(input: string, defaultValue: string): string {
   return input.trim() || defaultValue;
 }

@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { getSafeValue, parseString, parseApiUrl, parsePriority, parseBoolean, parseTags, parseActions } from '../src/common.js';
+import { getSafeValue, encodeRfc2047, parseString, parseApiUrl, parsePriority, parseBoolean, parseTags, parseActions } from '../src/common.js';
 
 describe('common', function () {
   it('getSafeValue', function () {
@@ -9,6 +9,13 @@ describe('common', function () {
     expect(getSafeValue('hello;world')).to.eq('"hello;world"');
     expect(getSafeValue('hello,world;test')).to.eq('"hello,world;test"');
     expect(getSafeValue('')).to.eq('');
+  });
+
+  it('encodeRfc2047', function () {
+    expect(encodeRfc2047('hello')).to.eq('hello');
+    expect(encodeRfc2047('Hello 世界')).to.eq('=?UTF-8?B?SGVsbG8g5LiW55WM?=');
+    expect(encodeRfc2047('Äpfel')).to.eq('=?UTF-8?B?w4RwZmVs?=');
+    expect(encodeRfc2047('日本語')).to.eq('=?UTF-8?B?5pel5pys6Kqe?=');
   });
 
   it('parseString', function () {

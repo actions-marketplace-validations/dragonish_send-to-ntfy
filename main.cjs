@@ -28155,6 +28155,13 @@ function getSafeValue(input) {
     }
     return input;
 }
+function encodeRfc2047(input) {
+    if (/^[\x20-\x7E]*$/.test(input)) {
+        return input;
+    }
+    const encoded = Buffer.from(input, 'utf-8').toString('base64');
+    return `=?UTF-8?B?${encoded}?=`;
+}
 function parseString(input, defaultValue) {
     return input.trim() || defaultValue;
 }
@@ -40685,22 +40692,22 @@ async function send(inputs) {
         headers['X-Priority'] = priority.toString();
     }
     if (tags && tags.length > 0) {
-        headers['X-Tags'] = tags.join(',');
+        headers['X-Tags'] = encodeRfc2047(tags.join(','));
     }
     if (title) {
-        headers['X-Title'] = title;
+        headers['X-Title'] = encodeRfc2047(title);
     }
     if (markdown) {
         headers['X-Markdown'] = 'true';
     }
     if (click) {
-        headers['X-Click'] = click;
+        headers['X-Click'] = encodeRfc2047(click);
     }
     if (icon) {
-        headers['X-Icon'] = icon;
+        headers['X-Icon'] = encodeRfc2047(icon);
     }
     if (email) {
-        headers['X-Email'] = email;
+        headers['X-Email'] = encodeRfc2047(email);
     }
     if (call) {
         headers['X-Call'] = call;
@@ -40723,13 +40730,13 @@ async function send(inputs) {
                     break;
             }
         }
-        headers['X-Actions'] = xActions.join('; ');
+        headers['X-Actions'] = encodeRfc2047(xActions.join('; '));
     }
     if (delay) {
-        headers['X-Delay'] = delay;
+        headers['X-Delay'] = encodeRfc2047(delay);
     }
     if (sequenceId) {
-        headers['X-Sequence-ID'] = sequenceId;
+        headers['X-Sequence-ID'] = encodeRfc2047(sequenceId);
     }
     if (noCache) {
         headers['X-Cache'] = 'no';
@@ -40741,10 +40748,10 @@ async function send(inputs) {
         headers['X-UnifiedPush'] = '1';
     }
     if (pollId) {
-        headers['X-Poll-ID'] = pollId;
+        headers['X-Poll-ID'] = encodeRfc2047(pollId);
     }
     if (template) {
-        headers['X-Template'] = template;
+        headers['X-Template'] = encodeRfc2047(template);
     }
     if (accessToken) {
         headers['Authorization'] = `Bearer ${accessToken}`;
@@ -40755,10 +40762,10 @@ async function send(inputs) {
     try {
         if (attach && isLocalPath(attach)) {
             if (message) {
-                headers['X-Message'] = message;
+                headers['X-Message'] = encodeRfc2047(message);
             }
             if (filename) {
-                headers['X-Filename'] = filename;
+                headers['X-Filename'] = encodeRfc2047(filename);
             }
             const res = await got
                 .put(apiUrl, {
@@ -40777,9 +40784,9 @@ async function send(inputs) {
         }
         else {
             if (attach) {
-                headers['X-Attach'] = attach;
+                headers['X-Attach'] = encodeRfc2047(attach);
                 if (filename) {
-                    headers['X-Filename'] = filename;
+                    headers['X-Filename'] = encodeRfc2047(filename);
                 }
             }
             const res = await got

@@ -72,6 +72,23 @@ describe('notify', function () {
       expect(res).to.have.deep.property('title', 'Test title');
     });
 
+    it('send a message with non-ASCII title', async function () {
+      const res = await send({
+        apiUrl,
+        accessToken,
+        basicAuth,
+        title: '测试标题',
+        message: 'This is a test message with non-ASCII title.',
+      });
+      expect(res).to.have.own.property('id');
+      expect(res).to.have.own.property('time');
+      expect(res).to.have.own.property('expires');
+      expect(res).to.have.own.property('topic');
+      expect(res).to.have.deep.property('event', 'message');
+      expect(res).to.have.deep.property('message', 'This is a test message with non-ASCII title.');
+      expect(res).to.have.deep.property('title', '测试标题');
+    });
+
     it('send a message with priority', async function () {
       const res = await send({
         apiUrl,
@@ -104,6 +121,23 @@ describe('notify', function () {
       expect(res).to.have.deep.property('event', 'message');
       expect(res).to.have.deep.property('message', 'This is a test message with tags.');
       expect(res).to.have.deep.property('tags', ['test', 'shamrock']);
+    });
+
+    it('send a message with non-ASCII tags', async function () {
+      const res = await send({
+        apiUrl,
+        accessToken,
+        basicAuth,
+        message: 'This is a test message with non-ASCII tags.',
+        tags: ['测试', 'shamrock'],
+      });
+      expect(res).to.have.own.property('id');
+      expect(res).to.have.own.property('time');
+      expect(res).to.have.own.property('expires');
+      expect(res).to.have.own.property('topic');
+      expect(res).to.have.deep.property('event', 'message');
+      expect(res).to.have.deep.property('message', 'This is a test message with non-ASCII tags.');
+      expect(res).to.have.deep.property('tags', ['测试', 'shamrock']);
     });
 
     it('send a message with markdown', async function () {
@@ -166,6 +200,35 @@ describe('notify', function () {
       expect(res).to.have.own.property('topic');
       expect(res).to.have.deep.property('event', 'message');
       expect(res).to.have.deep.property('message', 'This is a test message with actions.');
+      expect(res).to.have.own.property('actions');
+    });
+
+    it('send a message with non-ASCII actions', async function () {
+      const res = await send({
+        apiUrl,
+        accessToken,
+        basicAuth,
+        message: 'This is a test message with non-ASCII actions.',
+        actions: [
+          {
+            action: 'view',
+            label: '查看',
+            url: 'https://ntfy.sh',
+          },
+          {
+            action: 'copy',
+            label: '复制',
+            value: '测试内容',
+            clear: true,
+          },
+        ],
+      });
+      expect(res).to.have.own.property('id');
+      expect(res).to.have.own.property('time');
+      expect(res).to.have.own.property('expires');
+      expect(res).to.have.own.property('topic');
+      expect(res).to.have.deep.property('event', 'message');
+      expect(res).to.have.deep.property('message', 'This is a test message with non-ASCII actions.');
       expect(res).to.have.own.property('actions');
     });
 
@@ -498,6 +561,23 @@ describe('notify', function () {
       expect(res).to.have.deep.property('title', 'Test title');
     });
 
+    it('send a message with non-ASCII title', async function () {
+      const res = await send({
+        apiUrl,
+        accessToken,
+        basicAuth,
+        title: '测试标题',
+        message: 'This is a test message with non-ASCII title.',
+      });
+      expect(res).to.have.own.property('id');
+      expect(res).to.have.own.property('time');
+      expect(res).to.have.own.property('expires');
+      expect(res).to.have.own.property('topic');
+      expect(res).to.have.deep.property('event', 'message');
+      expect(res).to.have.deep.property('message', 'This is a test message with non-ASCII title.');
+      expect(res).to.have.deep.property('title', '测试标题');
+    });
+
     it('send a message with priority', async function () {
       const res = await send({
         apiUrl,
@@ -530,6 +610,23 @@ describe('notify', function () {
       expect(res).to.have.deep.property('event', 'message');
       expect(res).to.have.deep.property('message', 'This is a test message with tags.');
       expect(res).to.have.deep.property('tags', ['test', 'shamrock']);
+    });
+
+    it('send a message with non-ASCII tags', async function () {
+      const res = await send({
+        apiUrl,
+        accessToken,
+        basicAuth,
+        message: 'This is a test message with non-ASCII tags.',
+        tags: ['测试', 'shamrock'],
+      });
+      expect(res).to.have.own.property('id');
+      expect(res).to.have.own.property('time');
+      expect(res).to.have.own.property('expires');
+      expect(res).to.have.own.property('topic');
+      expect(res).to.have.deep.property('event', 'message');
+      expect(res).to.have.deep.property('message', 'This is a test message with non-ASCII tags.');
+      expect(res).to.have.deep.property('tags', ['测试', 'shamrock']);
     });
 
     it('send a message with markdown', async function () {
@@ -592,6 +689,35 @@ describe('notify', function () {
       expect(res).to.have.own.property('topic');
       expect(res).to.have.deep.property('event', 'message');
       expect(res).to.have.deep.property('message', 'This is a test message with actions.');
+      expect(res).to.have.own.property('actions');
+    });
+
+    it('send a message with non-ASCII actions', async function () {
+      const res = await send({
+        apiUrl,
+        accessToken,
+        basicAuth,
+        message: 'This is a test message with non-ASCII actions.',
+        actions: [
+          {
+            action: 'view',
+            label: '查看',
+            url: 'https://ntfy.sh',
+          },
+          {
+            action: 'copy',
+            label: '复制',
+            value: '测试内容',
+            clear: true,
+          },
+        ],
+      });
+      expect(res).to.have.own.property('id');
+      expect(res).to.have.own.property('time');
+      expect(res).to.have.own.property('expires');
+      expect(res).to.have.own.property('topic');
+      expect(res).to.have.deep.property('event', 'message');
+      expect(res).to.have.deep.property('message', 'This is a test message with non-ASCII actions.');
       expect(res).to.have.own.property('actions');
     });
 

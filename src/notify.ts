@@ -1,6 +1,6 @@
 import got, { HTTPError } from 'got';
 import { createReadStream } from 'node:fs';
-import { getSafeValue } from './common.js';
+import { getSafeValue, encodeRfc2047 } from './common.js';
 
 function isLocalPath(path: string): boolean {
   return !/^https?:\/\//i.test(path);
@@ -102,23 +102,23 @@ export async function send(inputs: SendInputs) {
   }
 
   if (tags && tags.length > 0) {
-    headers['X-Tags'] = tags.join(',');
+    headers['X-Tags'] = encodeRfc2047(tags.join(','));
   }
   if (title) {
-    headers['X-Title'] = title;
+    headers['X-Title'] = encodeRfc2047(title);
   }
   if (markdown) {
     headers['X-Markdown'] = 'true';
   }
   if (click) {
-    headers['X-Click'] = click;
+    headers['X-Click'] = encodeRfc2047(click);
   }
   if (icon) {
-    headers['X-Icon'] = icon;
+    headers['X-Icon'] = encodeRfc2047(icon);
   }
 
   if (email) {
-    headers['X-Email'] = email;
+    headers['X-Email'] = encodeRfc2047(email);
   }
 
   if (call) {
@@ -144,15 +144,15 @@ export async function send(inputs: SendInputs) {
       }
     }
 
-    headers['X-Actions'] = xActions.join('; ');
+    headers['X-Actions'] = encodeRfc2047(xActions.join('; '));
   }
 
   if (delay) {
-    headers['X-Delay'] = delay;
+    headers['X-Delay'] = encodeRfc2047(delay);
   }
 
   if (sequenceId) {
-    headers['X-Sequence-ID'] = sequenceId;
+    headers['X-Sequence-ID'] = encodeRfc2047(sequenceId);
   }
 
   if (noCache) {
@@ -168,11 +168,11 @@ export async function send(inputs: SendInputs) {
   }
 
   if (pollId) {
-    headers['X-Poll-ID'] = pollId;
+    headers['X-Poll-ID'] = encodeRfc2047(pollId);
   }
 
   if (template) {
-    headers['X-Template'] = template;
+    headers['X-Template'] = encodeRfc2047(template);
   }
 
   if (accessToken) {
@@ -184,10 +184,10 @@ export async function send(inputs: SendInputs) {
   try {
     if (attach && isLocalPath(attach)) {
       if (message) {
-        headers['X-Message'] = message;
+        headers['X-Message'] = encodeRfc2047(message);
       }
       if (filename) {
-        headers['X-Filename'] = filename;
+        headers['X-Filename'] = encodeRfc2047(filename);
       }
 
       const res = await got
@@ -207,10 +207,10 @@ export async function send(inputs: SendInputs) {
       return res;
     } else {
       if (attach) {
-        headers['X-Attach'] = attach;
+        headers['X-Attach'] = encodeRfc2047(attach);
 
         if (filename) {
-          headers['X-Filename'] = filename;
+          headers['X-Filename'] = encodeRfc2047(filename);
         }
       }
 
